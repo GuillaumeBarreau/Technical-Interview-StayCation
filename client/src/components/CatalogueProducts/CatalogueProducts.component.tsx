@@ -5,6 +5,7 @@ import { IProductCard } from "../ProductCard/ProductCard.types";
 
 const CatalogueProducts = () => {
   const [products, setProducts] = useState<IProductCard[] | []>([]);
+
   useEffect(() => {
     fetch("http://localhost:9000/hotels")
       .then(

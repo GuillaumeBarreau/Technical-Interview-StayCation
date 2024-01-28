@@ -29,3 +29,23 @@
 .headerContent > :nth-child(1) { 
     grid-column-start: 2; 
 }
+
+@media screen and (max-width: 600px) {
+    .headerWrapper {
+        padding: 0 1.5rem;
+    }
+    
+    .headerContent {
+        grid-template-columns: 1fr repeat(2, auto) 1fr;
+    }
+    
+    .headerContent > :nth-child(2) { 
+        grid-column-start: 2;
+        grid-column-end: -1;
+        justify-self: self-end;
+    }
+        
+    .headerContent > :nth-child(1) { 
+        grid-column-start: 1; 
+    }
+}

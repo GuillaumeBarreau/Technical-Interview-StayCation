@@ -18,3 +18,12 @@
     min-width: auto;
     list-style-type: none;
 }
+
+@media screen and (max-width: 600px) {
+    .catalogueProductsWrapper {
+        padding: 0 1.5rem;
+    }
+    .catalogueProductsItemWrapper {
+        grid-template-columns: repeat(1 ,minmax(0,1fr));
+    }
+}
