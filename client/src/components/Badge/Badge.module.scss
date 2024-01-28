@@ -1,0 +1,11 @@
+@import "@/styles/colors.scss";
+
+.badgeWrapper {
+    background-color: $primary;
+    color: $white;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: 0.25rem;
+}

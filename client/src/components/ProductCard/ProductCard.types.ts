@@ -4,12 +4,13 @@ export interface IProductCard {
   preview: string;
   pictureId: string;
   discountPrice: number;
+  price: number;
   stars: number;
   reviewCount: number;
   averageScore: number;
 }
 
-export type TProductCardDetails = Pick<IProductCard, "name" | "stars" | "preview" | "discountPrice"  | "reviewCount" | "averageScore">;
+export type TProductCardDetails = Pick<IProductCard, "name" | "stars" | "preview" | "reviewCount" | "averageScore">;
 export type TProductCardTitle = Pick<IProductCard, "name"  >;
 export type TProductCardImage = {
   src: string;
@@ -21,3 +22,4 @@ export type TProductCardText = {
   fontSize?: "small" | "medium" | "large";
   color?: string;
 };
+export type TProductCardPrice = Pick<IProductCard, "discountPrice" | "price">;

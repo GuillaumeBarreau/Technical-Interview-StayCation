@@ -1,3 +1,5 @@
+@import "@/styles/colors.scss";
+
 .productCardRatingWrapper {
     display: flex;
     align-items: center;
@@ -19,11 +21,11 @@
 
 .productCardRatingScore > :nth-child(2) {
     font-weight: 700;
-    color: black;
+    color: $text;
 }
 
 .productCardRatingText {
     font-size: 0.75rem;
     margin-left: 0.25rem;
-    color: #777;
+    color: $text-light;
 }
