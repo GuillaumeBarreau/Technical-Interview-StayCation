@@ -67,3 +67,4 @@ A few key points to help you through styling:
 - An hotel is bookable on a given day only if there is at least an opening for one of its room on this date and with a stock > 0
 - The lowest availability on a sale period for an hotel is the available opening with the lowest `discount_price` on this given `sale_id`
 - The last `sale_id` for this test is (obviously) the `sale_dates` row where the date is the latest (`id 90` in our test data)
+# Technical-Interview-StayCation
