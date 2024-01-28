@@ -1,7 +1,7 @@
 import camelCase from "camelcase-keys";
-import DB from "../client-pg.js";
+import DB from "../../client-pg.js";
 
-export const getAllHotels = async () => {
+export const getHotels = async () => {
   const query = `
     SELECT hotels.*, COUNT(reviews.id) AS review_count, AVG(reviews.score) AS average_score
     FROM public.hotels AS hotels

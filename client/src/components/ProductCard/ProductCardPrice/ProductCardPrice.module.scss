@@ -1,0 +1,12 @@
+@import "@/styles/colors.scss";
+
+.ProductCardPriceWrapper {
+    font-weight: 600;
+    line-height: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.ProductCardPriceWrapper > * {
+    margin-right: 0.25rem;
+}

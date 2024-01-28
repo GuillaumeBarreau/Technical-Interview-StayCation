@@ -1,5 +1,5 @@
 import Header from "./components/Header/Header.component.tsx";
-import CatalogueProducts from "./components/CatalogueProducts/CatalogueProducts.component";
+import CatalogueProducts from "./pages/CatalogueProducts/CatalogueProducts.component.tsx";
 
 function App() {
   return (

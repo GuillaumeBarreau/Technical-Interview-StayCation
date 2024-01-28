@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 
 import { getUser } from "./services/userService.js";
-import { getAllHotels } from "./services/hotelService.js";
+import { getHotels } from "./services/hotels/get-hotels.service.js";
+import { getLatestHotelsPackage } from "./services/hotels/get-latest-hotels-package.service.js";
 
 const app = express();
 
@@ -14,7 +15,21 @@ app.get("/", function (req, res) {
 
 app.get("/hotels", async (req, res) => {
   try {
-    const hotels = await getAllHotels();
+    const hotels = await getHotels();
+
+    if (hotels) {
+      res.status(200).send(hotels);
+    }
+  } catch (error) {
+    res.status(500).send("Error");
+    console.log(error);
+  }
+});
+
+app.get("/latest-hotel-package", async (req, res) => {
+  try {
+    const hotels = await getLatestHotelsPackage();
+
     if (hotels) {
       res.status(200).send(hotels);
     }

@@ -2,6 +2,7 @@ import styles from "./ProductCard.module.scss";
 import { IProductCard } from "./ProductCard.types";
 import ProductCardImage from "./ProductCardImage/ProductCardImage.component";
 import ProductCardDetails from "./ProductCardDetails/ProductCardDetails.component";
+import ProductCardPrice from "./ProductCardPrice/ProductCardPrice.component";
 
 const ProductCard = (props: IProductCard) => {
   const {
@@ -12,13 +13,13 @@ const ProductCard = (props: IProductCard) => {
     discountPrice,
     reviewCount,
     averageScore,
+    price,
   } = props;
 
   const ProductCardDetailsProps = {
     name,
     stars,
     preview,
-    discountPrice,
     reviewCount,
     averageScore,
   };
@@ -28,10 +29,16 @@ const ProductCard = (props: IProductCard) => {
     alt: name,
   };
 
+  const ProductCardPriceProps = {
+    discountPrice,
+    price,
+  };
+
   return (
     <div className={styles.productCardWrapper}>
       <ProductCardImage {...ProductCardImageProps} />
       <ProductCardDetails {...ProductCardDetailsProps} />
+      <ProductCardPrice {...ProductCardPriceProps} />
     </div>
   );
 };

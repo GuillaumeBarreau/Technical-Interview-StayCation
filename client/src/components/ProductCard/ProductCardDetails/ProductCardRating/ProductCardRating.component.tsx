@@ -1,6 +1,6 @@
 import { TProductCardRating } from "../../ProductCard.types";
 import { displayStars } from "../../ProductCard.utils";
-import ProductCardText from "../ProductCardText/ProductCardText.component";
+import ProductCardText from "../../../Typography/Typography.component";
 import styles from "./ProductCardRating.module.scss";
 import StarLogo from "./StarLogo";
 

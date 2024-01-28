@@ -1,21 +1,19 @@
-import ProductCard from "../ProductCard/ProductCard.component";
+import { IProductCard } from "@/components/ProductCard/ProductCard.types";
+import ProductCard from "@/components/ProductCard/ProductCard.component";
 import styles from "./CatalogueProducts.module.scss";
 import { useEffect, useState } from "react";
-import { IProductCard } from "../ProductCard/ProductCard.types";
 
 const CatalogueProducts = () => {
   const [products, setProducts] = useState<IProductCard[] | []>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/hotels")
-      .then(
-        async (res: {
-          json: () => IProductCard[] | PromiseLike<IProductCard[]>;
-        }) => {
-          const result = await res.json();
-          setProducts(result);
-        }
-      )
+    fetch(
+      `${process.env.API_URL}${process.env.API_ENDPOINT_LATEST_HOTELS_PACKAGE}`
+    )
+      .then(async (res) => {
+        const result = await res.json();
+        setProducts(result);
+      })
       .catch((e) => console.warn("Error: ", e));
   }, []);
 
