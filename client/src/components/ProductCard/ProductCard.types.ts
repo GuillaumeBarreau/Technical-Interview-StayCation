@@ -1,5 +1,6 @@
 export interface IProductCard {
   id: number;
+  hotelId: number;
   name: string;
   preview: string;
   pictureId: string;
@@ -8,8 +9,8 @@ export interface IProductCard {
   stars: number;
   reviewCount: number;
   averageScore: number;
+  percentageDiscount: number;
 }
-
 export type TProductCardDetails = Pick<IProductCard, "name" | "stars" | "preview" | "reviewCount" | "averageScore">;
 export type TProductCardTitle = Pick<IProductCard, "name"  >;
 export type TProductCardImage = {
@@ -22,4 +23,4 @@ export type TProductCardText = {
   fontSize?: "small" | "medium" | "large";
   color?: string;
 };
-export type TProductCardPrice = Pick<IProductCard, "discountPrice" | "price">;
+export type TProductCardPrice = Pick<IProductCard, "discountPrice" | "price" | "percentageDiscount">;
