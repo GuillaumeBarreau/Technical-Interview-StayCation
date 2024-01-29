@@ -3,4 +3,13 @@
     flex-direction: column;
     margin-bottom: 1.5rem;
     margin-top: 0.5rem;
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+}
+
+.productCardWrapperDisabled {
+   opacity: 0.8;
+   cursor: not-allowed;
+   -webkit-filter: grayscale(1);
+           filter: grayscale(1)
 }
