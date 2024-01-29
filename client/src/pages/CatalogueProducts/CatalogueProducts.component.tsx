@@ -23,7 +23,10 @@ const CatalogueProducts = () => {
         <ul className={styles.catalogueProductsItemWrapper}>
           {products?.map((product) => {
             return (
-              <li key={product?.id} className={styles.catalogueProductsItem}>
+              <li
+                key={product?.hotelId}
+                className={styles.catalogueProductsItem}
+              >
                 <ProductCard {...product} />
               </li>
             );

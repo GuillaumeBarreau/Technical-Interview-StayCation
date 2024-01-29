@@ -60,8 +60,10 @@ export const getHotelsPackagesData = async () => {
   const hotelInformation = await getLastHotelsPackage(lastSaleId);
 
   const parseData = hotelInformation.map((details) => {
+    const { id, ...rest } = details;
     return {
-      ...details,
+      ...rest,
+      averageScore: details.averageScore.toFixed(1),
       percentageDiscount: calculatePercentageDiscount(
         details.discountPrice,
         details.price
