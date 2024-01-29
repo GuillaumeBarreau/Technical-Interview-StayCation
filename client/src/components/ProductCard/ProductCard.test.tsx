@@ -1,4 +1,3 @@
-import { jest } from "@jest/globals";
 import { render } from "@testing-library/react";
 import Component from "./ProductCard.component";
 import { IProductCard } from "./ProductCard.types";
