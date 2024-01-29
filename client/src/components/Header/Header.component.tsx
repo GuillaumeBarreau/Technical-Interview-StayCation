@@ -11,7 +11,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     fetch(`${process.env.API_URL}/users/1`)
-      .then(async (res: { json: () => User | PromiseLike<User> }) => {
+      .then(async (res) => {
         const result: User = await res.json();
         setUser(result);
       })

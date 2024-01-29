@@ -3,7 +3,7 @@ import cors from "cors";
 
 import { getUser } from "./services/userService.js";
 import { getHotels } from "./services/hotels/get-hotels.service.js";
-import { getLatestHotelsPackage } from "./services/hotels/get-latest-hotels-package.service.js";
+import { getHotelsPackagesData } from "./services/hotels/get-last-hotels-package.service.js";
 
 const app = express();
 
@@ -26,12 +26,12 @@ app.get("/hotels", async (req, res) => {
   }
 });
 
-app.get("/latest-hotel-package", async (req, res) => {
+app.get("/last-hotels-package", async (req, res) => {
   try {
-    const hotels = await getLatestHotelsPackage();
+    const packages = await getHotelsPackagesData();
 
-    if (hotels) {
-      res.status(200).send(hotels);
+    if (packages) {
+      res.status(200).send(packages);
     }
   } catch (error) {
     res.status(500).send("Error");

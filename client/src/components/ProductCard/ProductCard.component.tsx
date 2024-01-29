@@ -14,6 +14,7 @@ const ProductCard = (props: IProductCard) => {
     reviewCount,
     averageScore,
     price,
+    percentageDiscount,
   } = props;
 
   const ProductCardDetailsProps = {
@@ -32,6 +33,7 @@ const ProductCard = (props: IProductCard) => {
   const ProductCardPriceProps = {
     discountPrice,
     price,
+    percentageDiscount,
   };
 
   return (
