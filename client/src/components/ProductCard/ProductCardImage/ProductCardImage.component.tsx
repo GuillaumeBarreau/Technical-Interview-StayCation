@@ -1,8 +1,9 @@
-import { TProductCardImage } from "../ProductCard.types";
-import styles from "./ProductCardImage.module.scss";
+import { TProductCardImage } from '../ProductCard.types';
+import styles from './ProductCardImage.module.scss';
 
 const ProductCardImage = (props: TProductCardImage) => {
-  return <img className={styles.productCardImage} {...props} />;
+  const { src, alt } = props;
+  return <img className={styles.productCardImage} src={src} alt={alt} />;
 };
 
 export default ProductCardImage;

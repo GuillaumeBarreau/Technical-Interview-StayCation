@@ -1,14 +1,13 @@
-import { jest } from "@jest/globals";
-import { render } from "@testing-library/react";
-import Component from "./ProductCard.component";
-import { IProductCard } from "./ProductCard.types";
+import { render } from '@testing-library/react';
+import Component from './ProductCard.component';
+import { IProductCard } from './ProductCard.types';
 
 const props: IProductCard = {
   id: 1,
   hotelId: 1,
-  name: "ProductCard name",
-  preview: "ProductCard preview",
-  pictureId: "ProductCard pictureId",
+  name: 'ProductCard name',
+  preview: 'ProductCard preview',
+  pictureId: 'ProductCard pictureId',
   discountPrice: 1,
   price: 1,
   stars: 1,
@@ -36,8 +35,8 @@ const setup = ({ ...overrideProps }) => {
   return render(<Component {...props} {...overrideProps}></Component>);
 };
 
-describe("Test ProductCard component", () => {
-  it("should render the component", () => {
+describe('Test ProductCard component', () => {
+  it('should render the component', () => {
     const { container } = setup({ ...props });
     expect(container).toBeInTheDocument();
   });

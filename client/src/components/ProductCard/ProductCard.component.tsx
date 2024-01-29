@@ -1,21 +1,11 @@
-import styles from "./ProductCard.module.scss";
-import { IProductCard } from "./ProductCard.types";
-import ProductCardImage from "./ProductCardImage/ProductCardImage.component";
-import ProductCardDetails from "./ProductCardDetails/ProductCardDetails.component";
-import ProductCardPrice from "./ProductCardPrice/ProductCardPrice.component";
+import styles from './ProductCard.module.scss';
+import { IProductCard } from './ProductCard.types';
+import ProductCardImage from './ProductCardImage/ProductCardImage.component';
+import ProductCardDetails from './ProductCardDetails/ProductCardDetails.component';
+import ProductCardPrice from './ProductCardPrice/ProductCardPrice.component';
 
 const ProductCard = (props: IProductCard) => {
-  const {
-    name,
-    stars,
-    preview,
-    pictureId,
-    discountPrice,
-    reviewCount,
-    averageScore,
-    price,
-    percentageDiscount,
-  } = props;
+  const { name, stars, preview, pictureId, discountPrice, reviewCount, averageScore, price, percentageDiscount } = props;
 
   const ProductCardDetailsProps = {
     name,

@@ -1,23 +1,23 @@
-@import "@/styles/colors.scss";
+@import '@/styles/colors.scss';
 
 .TypographyWrapper {
-    font-weight: 500;
-    line-height: 1.5rem;
-    color: $text;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: $text;
 }
 
 .Typography--small {
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.25rem;
-    color: $text-light;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: $text-light;
 }
 
 .Typography--medium {
-    font-size: 1rem;
-    font-weight: 600;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .Typography--large {
-    font-size: 1.125rem;
+  font-size: 1.125rem;
 }

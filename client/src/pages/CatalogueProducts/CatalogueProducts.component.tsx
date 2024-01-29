@@ -1,7 +1,7 @@
-import { IProductCard } from "@/components/ProductCard/ProductCard.types";
-import ProductCard from "@/components/ProductCard/ProductCard.component";
-import styles from "./CatalogueProducts.module.scss";
-import { useEffect, useState } from "react";
+import { IProductCard } from '@/components/ProductCard/ProductCard.types';
+import ProductCard from '@/components/ProductCard/ProductCard.component';
+import styles from './CatalogueProducts.module.scss';
+import { useEffect, useState } from 'react';
 
 const CatalogueProducts = () => {
   const [products, setProducts] = useState<IProductCard[] | []>([]);
@@ -12,7 +12,7 @@ const CatalogueProducts = () => {
         const result = await res.json();
         setProducts(result);
       })
-      .catch((e) => console.warn("Error: ", e));
+      .catch((e) => console.warn('Error: ', e));
   }, []);
 
   return (
@@ -21,10 +21,7 @@ const CatalogueProducts = () => {
         <ul className={styles.catalogueProductsItemWrapper}>
           {products?.map((product) => {
             return (
-              <li
-                key={product?.hotelId}
-                className={styles.catalogueProductsItem}
-              >
+              <li key={product?.hotelId} className={styles.catalogueProductsItem}>
                 <ProductCard {...product} />
               </li>
             );

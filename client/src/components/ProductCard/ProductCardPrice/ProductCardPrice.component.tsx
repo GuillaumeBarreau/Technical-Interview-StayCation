@@ -1,7 +1,7 @@
-import { TProductCardPrice } from "../ProductCard.types";
-import Typography from "@/components/Typography/Typography.component";
-import Badge from "@/components/Badge/Badge.component";
-import styles from "./ProductCardPrice.module.scss";
+import { TProductCardPrice } from '../ProductCard.types';
+import Typography from '@/components/Typography/Typography.component';
+import Badge from '@/components/Badge/Badge.component';
+import styles from './ProductCardPrice.module.scss';
 
 const ProductCardPrice = (props: TProductCardPrice) => {
   const { price, discountPrice, percentageDiscount } = props;
@@ -16,9 +16,7 @@ const ProductCardPrice = (props: TProductCardPrice) => {
       <Typography fontSize="small">
         <del>{`${price}€`}</del>
       </Typography>
-      {discountPrice && percentageDiscount && (
-        <Badge>{`-${percentageDiscount}%`}</Badge>
-      )}
+      {discountPrice && percentageDiscount && <Badge>{`-${percentageDiscount}%`}</Badge>}
     </div>
   );
 };

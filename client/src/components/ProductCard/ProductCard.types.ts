@@ -11,16 +11,16 @@ export interface IProductCard {
   averageScore: number;
   percentageDiscount: number;
 }
-export type TProductCardDetails = Pick<IProductCard, "name" | "stars" | "preview" | "reviewCount" | "averageScore">;
-export type TProductCardTitle = Pick<IProductCard, "name"  >;
+export type TProductCardDetails = Pick<IProductCard, 'name' | 'stars' | 'preview' | 'reviewCount' | 'averageScore'>;
+export type TProductCardTitle = Pick<IProductCard, 'name'>;
 export type TProductCardImage = {
   src: string;
   alt: string;
 };
-export type TProductCardRating = Pick<IProductCard, "reviewCount" | "averageScore"  | "name" | "stars">;
+export type TProductCardRating = Pick<IProductCard, 'reviewCount' | 'averageScore' | 'name' | 'stars'>;
 export type TProductCardText = {
   children: string;
-  fontSize?: "small" | "medium" | "large";
+  fontSize?: 'small' | 'medium' | 'large';
   color?: string;
 };
-export type TProductCardPrice = Pick<IProductCard, "discountPrice" | "price" | "percentageDiscount">;
+export type TProductCardPrice = Pick<IProductCard, 'discountPrice' | 'price' | 'percentageDiscount'>;

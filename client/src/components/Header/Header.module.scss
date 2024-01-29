@@ -1,68 +1,68 @@
 @import '@/styles/colors';
 
 .headerWrapper {
-    position: -webkit-sticky;
-    position: sticky;
-    height: 5rem;
-    top: 0;
-    margin-bottom: 3rem;
-    padding: 0 3rem;
-    background-color: #fff;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: -webkit-sticky;
+  position: sticky;
+  height: 5rem;
+  top: 0;
+  margin-bottom: 3rem;
+  padding: 0 3rem;
+  background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .headerContent {
-    display: grid;
-    grid-template-columns: 1fr repeat(3, auto) 1fr;
-    height: 100%;
-    align-content: center;
-    max-width: 70rem;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto) 1fr;
+  height: 100%;
+  align-content: center;
+  max-width: 70rem;
+  margin: 0 auto;
 }
 
-.headerContent > :nth-child(2) { 
-    grid-column-start: 3;
-    grid-column-end: -1;
-    justify-self: self-end;
+.headerContent > :nth-child(2) {
+  grid-column-start: 3;
+  grid-column-end: -1;
+  justify-self: self-end;
 }
-    
-.headerContent > :nth-child(1) { 
-    grid-column-start: 2; 
+
+.headerContent > :nth-child(1) {
+  grid-column-start: 2;
 }
 
 @media screen and (max-width: 600px) {
-    .headerWrapper {
-        padding: 0 1.5rem;
-    }
-    
-    .headerContent {
-        grid-template-columns: 1fr repeat(2, auto) 1fr;
-    }
-    
-    .headerContent > :nth-child(2) { 
-        grid-column-start: 2;
-        grid-column-end: -1;
-        justify-self: self-end;
-    }
-        
-    .headerContent > :nth-child(1) { 
-        grid-column-start: 1; 
-    }
+  .headerWrapper {
+    padding: 0 1.5rem;
+  }
+
+  .headerContent {
+    grid-template-columns: 1fr repeat(2, auto) 1fr;
+  }
+
+  .headerContent > :nth-child(2) {
+    grid-column-start: 2;
+    grid-column-end: -1;
+    justify-self: self-end;
+  }
+
+  .headerContent > :nth-child(1) {
+    grid-column-start: 1;
+  }
 }
 
 @media screen and (max-width: 400px) {
-    .headerWrapper {
-        padding: 0 1.5rem;
-    }
-    
-    .headerContent {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;;
-        align-items: center;
-    }
-    
-    .headerContent > :nth-child(2) { 
-        font-size: small;
-    }
+  .headerWrapper {
+    padding: 0 1.5rem;
+  }
+
+  .headerContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .headerContent > :nth-child(2) {
+    font-size: small;
+  }
 }
