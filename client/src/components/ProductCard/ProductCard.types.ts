@@ -1,7 +1,10 @@
 export interface IProductCard {
   id: number;
   hotelId: number;
+  roomId: number;
+  date: string;
   name: string;
+  stock: number;
   preview: string;
   pictureId: string;
   discountPrice: number;

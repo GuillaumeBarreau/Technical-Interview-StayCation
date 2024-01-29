@@ -4,6 +4,7 @@ import cors from "cors";
 import { getUser } from "./services/userService.js";
 import { getHotels } from "./services/hotels/get-hotels.service.js";
 import { getHotelsPackagesData } from "./services/hotels/get-last-hotels-package.service.js";
+import { getBookingAvailable } from "./services/booking/get-booking.service.js";
 
 const app = express();
 
@@ -33,6 +34,19 @@ app.get("/last-hotels-package", async (req, res) => {
     if (packages) {
       res.status(200).send(packages);
     }
+  } catch (error) {
+    res.status(500).send("Error");
+    console.log(error);
+  }
+});
+
+app.get("/booking/:roomId/:stock", async (req, res) => {
+  try {
+    const booking = await getBookingAvailable(
+      req.params.roomId,
+      req.params.stock
+    );
+    res.status(200).send(booking);
   } catch (error) {
     res.status(500).send("Error");
     console.log(error);

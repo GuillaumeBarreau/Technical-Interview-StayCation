@@ -2,7 +2,7 @@ import camelCase from "camelcase-keys";
 import DB from "../../client-pg.js";
 import { calculatePercentageDiscount } from "../../utils/utils.js";
 
-const queryLastSafeId = async () => {
+export const queryLastSafeId = async () => {
   const query = `
     SELECT id
     FROM public.sale_dates
@@ -50,7 +50,7 @@ const queryHotelDetails = async (saleId) => {
 
 const getLastHotelsPackage = async (saleId) => {
   const minPrices = await queryRoomMinPrices(saleId);
-  const hotelInformation = await queryHotelDetails(saleId, minPrices);
+  const hotelInformation = await queryHotelDetails(saleId);
 
   return hotelInformation;
 };
@@ -60,8 +60,8 @@ export const getHotelsPackagesData = async () => {
   const hotelInformation = await getLastHotelsPackage(lastSaleId);
 
   const parseData = hotelInformation.map((details) => {
-    console.log(details);
     const { id, preview, ...rest } = details;
+
     return {
       ...rest,
       averageScore: details.averageScore.toFixed(1),
