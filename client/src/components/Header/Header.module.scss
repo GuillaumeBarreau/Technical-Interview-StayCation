@@ -1,14 +1,15 @@
 @import '@/styles/colors';
 
 .headerWrapper {
-    position: -webkit-sticky;
-    position: sticky;
-    height: 5rem;
-    top: 0;
-    margin-bottom: 3rem;
-    padding: 0 3rem;
-    background-color: #fff;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: -webkit-sticky;
+  position: sticky;
+  height: 5rem;
+  top: 0;
+  margin-bottom: 3rem;
+  padding: 0 3rem;
+  background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  z-index: 10;
 }
 
 .headerContent {

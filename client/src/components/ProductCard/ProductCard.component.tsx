@@ -1,8 +1,8 @@
-import styles from "./ProductCard.module.scss";
 import { IProductCard } from "./ProductCard.types";
 import ProductCardImage from "./ProductCardImage/ProductCardImage.component";
 import ProductCardDetails from "./ProductCardDetails/ProductCardDetails.component";
 import ProductCardPrice from "./ProductCardPrice/ProductCardPrice.component";
+import styles from "./ProductCard.module.scss";
 
 const ProductCard = (props: IProductCard) => {
   const {
