@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   const [user, setUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}/users/1`)
+    fetch(`http://localhost:9000/users/1`)
       .then(async (res) => {
         const result: User = await res.json();
         setUser(result);

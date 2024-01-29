@@ -7,9 +7,7 @@ const CatalogueProducts = () => {
   const [products, setProducts] = useState<IProductCard[] | []>([]);
 
   useEffect(() => {
-    fetch(
-      `${process.env.API_URL}${process.env.API_ENDPOINT_LATEST_HOTELS_PACKAGE}`
-    )
+    fetch(`http://localhost:9000/last-hotels-package`)
       .then(async (res) => {
         const result = await res.json();
         setProducts(result);
