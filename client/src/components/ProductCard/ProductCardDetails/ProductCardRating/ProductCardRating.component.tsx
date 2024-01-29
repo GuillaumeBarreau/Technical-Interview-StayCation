@@ -1,7 +1,7 @@
+import ProductCardText from "@/components/Typography/Typography.component";
+import styles from "./ProductCardRating.module.scss";
 import { TProductCardRating } from "../../ProductCard.types";
 import { displayStars } from "../../ProductCard.utils";
-import ProductCardText from "../../../Typography/Typography.component";
-import styles from "./ProductCardRating.module.scss";
 import StarLogo from "./StarLogo";
 
 const ProductCardRating = (props: TProductCardRating) => {
@@ -21,9 +21,7 @@ const ProductCardRating = (props: TProductCardRating) => {
         {averageScore && averageScore != 0 && (
           <>
             <StarLogo />
-            <span className={styles.productCardRatingText}>
-              {averageScore.toFixed(1)}
-            </span>
+            <span className={styles.productCardRatingText}>{averageScore}</span>
           </>
         )}
         {reviewCount && reviewCount != 0 && (
