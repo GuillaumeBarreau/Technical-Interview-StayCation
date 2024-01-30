@@ -1,18 +1,18 @@
 import { querySelectLastSafeDate } from "../sale_dates/sale_dates.service.js";
-import { queryCountStockAvailable } from "./booking.service.js";
+import { queryMatchingRoomBookings } from "./booking.service.js";
 
 export const getBookingAvailable = async ({ roomId, stock }) => {
   const { id: saleId } = await querySelectLastSafeDate();
 
-  const response = await queryCountStockAvailable({
+  const response = await queryMatchingRoomBookings({
     roomId,
     stock,
     saleId,
   });
 
-  const { remainingStock } = response;
+  const { matchingCount } = response;
 
   return {
-    remainingStock,
+    matchingCount,
   };
 };

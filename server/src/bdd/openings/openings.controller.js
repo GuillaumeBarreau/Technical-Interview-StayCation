@@ -1,7 +1,7 @@
 import { querySelectOpeningsByRoomID } from "./openings.service.js";
 import { calculatePercentageDiscount } from "../../../utils/utils.js";
 
-export const getOpeningsRoom = async ({ saleId, roomId, stock }) => {
+export const getOpeningsRoom = async ({ saleId, roomId }) => {
   const response = await querySelectOpeningsByRoomID({ saleId, roomId });
 
   const results = response.map((details) => {

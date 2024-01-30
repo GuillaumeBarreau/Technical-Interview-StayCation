@@ -6,17 +6,16 @@ import Typography from "../Typography/Typography.component";
 import ProductCardPrice from "../ProductCard/ProductCardPrice/ProductCardPrice.component";
 
 const BookingCard = (props: IBookingCard) => {
-  const { saleId, roomId, stock } = props;
+  const { saleId, roomId } = props;
 
   const [openingsData, setOpeningsData] = useState([]);
 
   const fetchData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:9000/openings/${saleId}/${roomId}/${stock}`
+        `http://localhost:9000/openings/${saleId}/${roomId}`
       );
       const result = await res.json();
-
       setOpeningsData(result);
     } catch (error) {
       console.error("Error fetching data: ", error);
@@ -40,6 +39,7 @@ const BookingCard = (props: IBookingCard) => {
               stock,
               date,
             } = opening;
+
             return (
               <div className={styles.bookingCardDetailsContent} key={id}>
                 <div className={styles.bookingCardDetailsStock}>

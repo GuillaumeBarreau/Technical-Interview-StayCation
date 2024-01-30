@@ -1,6 +1,6 @@
 import camelCase from "camelcase-keys";
 
-import DB from "../client-pg.js";
+import DB from "../../client-pg.js";
 
 export const getUser = async (userId) => {
   const res = await DB.query("SELECT * FROM users WHERE id=$1::int", [userId]);
