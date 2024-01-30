@@ -25,3 +25,10 @@ Improvisation is welcome, as long as it demonstrates your ability to build great
  - [ ] . ~~Take bookings into account to compute remaining stockIf a package is not available on the current sale date,~~ fetch its lowest opening price on the most recent sale date it has availabilites on (careful, it's a windowed lookup ;)). ~~Display these availabilities in grey on the package card.~~
  - [x] (no code) How would you implement a caching strategy for this app?
 
+## Cache 
+
+La stratégie que je pourrais utiliser pour implémenter un système de cache dans l'application est d'utiliser un service comme Redis (je cite celui-ci car c'est le seul que j'ai vraiment utilisé). 
+Lorsqu'une requête sera effectuée pour récupérer des données, on devrait passer par notre cache Redis et vérifiez s'il y a un résultat déjà existant avant d'appeler et de récupérer les données sur le serveur. 
+Ceci évite de faire appel trop souvent à notre BDD et permet un retour rapide des données au client.
+
+
