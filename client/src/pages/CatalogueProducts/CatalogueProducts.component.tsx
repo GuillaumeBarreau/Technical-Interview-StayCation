@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { IProductCard } from "@/components/ProductCard/ProductCard.types";
-import ProductCard from "@/components/ProductCard/ProductCard.component";
 import { ProductCardSkeleton } from "@/components/ProductCard/ProductCard.skeleton";
 import styles from "./CatalogueProducts.module.scss";
+import ProductCard from "@/components/ProductCard/ProductCard.component";
+import { IProductCard } from "@/components/ProductCard/ProductCard.types";
 
 const CatalogueProducts = () => {
   const [products, setProducts] = useState<IProductCard[] | []>([]);

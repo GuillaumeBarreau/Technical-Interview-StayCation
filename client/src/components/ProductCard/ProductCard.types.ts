@@ -1,6 +1,7 @@
 export interface IProductCard {
   id: number;
   hotelId: number;
+  saleId: number;
   roomId: number;
   date: string;
   name: string;
@@ -13,7 +14,6 @@ export interface IProductCard {
   reviewCount: number;
   averageScore: number;
   percentageDiscount: number;
-  bookingAvailable: boolean;
 }
 export type TProductCardDetails = Pick<IProductCard, "name" | "stars" | "preview" | "reviewCount" | "averageScore">;
 export type TProductCardTitle = Pick<IProductCard, "name"  >;

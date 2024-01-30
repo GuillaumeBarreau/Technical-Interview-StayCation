@@ -2,8 +2,17 @@
     width: 100%;
     border-radius: 0.5rem;
     height: 16.25rem;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     -o-object-fit: cover;
        object-fit: cover;
     -o-object-position: center;
        object-position: center;
+}
+
+.productCardImage:hover {
+      -webkit-filter: brightness(0.72);
+               filter: brightness(0.72);
 }

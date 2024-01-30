@@ -1,7 +1,7 @@
 import camelCase from "camelcase-keys";
 import DB from "../../client-pg.js";
 import { calculatePercentageDiscount } from "../../utils/utils.js";
-import { getBookingAvailable } from "../booking/get-booking.service.js";
+import { queryCountStockAvailable } from "../../src/bdd/bookings/booking.service.js";
 
 export const queryLastSafeId = async () => {
   const query = `
@@ -31,7 +31,7 @@ const queryRoomMinPrices = async (saleId) => {
 };
 
 const queryHotelDetails = async (saleId) => {
-  // TODO : This query does not return the room with the cheapest price.
+  // TODO : This query does not return the last availability .
   // A correction needs to be made to it.
   // Using DISTINCT ON guarantees only one row per hotel, but the price is incorrect.
   const query = `
@@ -60,27 +60,29 @@ const getLastHotelsPackage = async (saleId) => {
 };
 
 export const getHotelsPackagesData = async () => {
-  const lastSaleId = await queryLastSafeId();
-  const hotelInformation = await getLastHotelsPackage(lastSaleId);
-
+  const safeId = await queryLastSafeId();
+  const hotelInformation = await getLastHotelsPackage(safeId);
+  console.log("getHotelsPackagesData safeId", safeId);
   const parseData = async (hotelInformation) => {
     const parsedData = await Promise.all(
       hotelInformation.map(async (details) => {
-        const { id, preview, ...rest } = details;
-        const { bookingAvailable } = await getBookingAvailable(
-          details.roomId,
-          details.stock
-        );
+        const { id, preview, roomId, stock, ...rest } = details;
+        const { bookingAvailable } = await queryCountStockAvailable({
+          roomId,
+          stock,
+          safeId: "red",
+        });
 
         return {
           ...rest,
+          roomId,
+          stock,
           averageScore: details.averageScore.toFixed(1),
           preview: details.preview.replace(/\+/g, "◦"),
           percentageDiscount: calculatePercentageDiscount(
             details.discountPrice,
             details.price
           ),
-          bookingAvailable,
         };
       })
     );
