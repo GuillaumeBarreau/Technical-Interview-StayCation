@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import Component from "./ProductCardPrice.component";
-import { TProductCardPrice } from "./../ProductCard.types";
+import { TProductCardPrice } from "../ProductCard.types";
 
 const props: TProductCardPrice = {
   price: 5,

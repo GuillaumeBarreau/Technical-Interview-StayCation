@@ -3,16 +3,13 @@ import cors from "cors";
 
 import { getUser } from "./services/userService.js";
 import { getHotels } from "./services/hotels/get-hotels.service.js";
-import { getHotelsPackagesData } from "./services/hotels/get-last-hotels-package.service.js";
-import { getBookingAvailable } from "./services/booking/get-booking.service.js";
+import { getLastPackageHotels } from "./src/bdd/hotels/hotels.controller.js";
+import { getBookingAvailable } from "./src/bdd/bookings/booking.controller.js";
+import { getOpeningsRoom } from "./src/bdd/openings/openings.controller.js";
 
 const app = express();
 
 app.use(cors());
-
-app.get("/", function (req, res) {
-  res.send("Hello World!");
-});
 
 app.get("/hotels", async (req, res) => {
   try {
@@ -29,7 +26,7 @@ app.get("/hotels", async (req, res) => {
 
 app.get("/last-hotels-package", async (req, res) => {
   try {
-    const packages = await getHotelsPackagesData();
+    const packages = await getLastPackageHotels();
 
     if (packages) {
       res.status(200).send(packages);
@@ -42,19 +39,26 @@ app.get("/last-hotels-package", async (req, res) => {
 
 app.get("/booking/:roomId/:stock", async (req, res) => {
   try {
-    const booking = await getBookingAvailable(
-      req.params.roomId,
-      req.params.stock
-    );
-    res.status(200).send(booking);
+    const { stock, roomId } = req.params;
+    const stockAvailable = await getBookingAvailable({ roomId, stock });
+
+    res.status(200).send(stockAvailable);
   } catch (error) {
     res.status(500).send("Error");
     console.log(error);
   }
 });
 
-app.get("/users", async (req, res) => {
-  res.json("Hello World!");
+app.get("/openings/:saleId/:roomId/:stock", async (req, res) => {
+  try {
+    const { saleId, roomId, stock } = req.params;
+    const openings = await getOpeningsRoom({ saleId, roomId, stock });
+
+    res.status(200).send(openings);
+  } catch (error) {
+    res.status(500).send("Error");
+    console.log(error);
+  }
 });
 
 app.get("/users/:id", async (req, res) => {

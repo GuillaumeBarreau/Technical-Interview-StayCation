@@ -1,8 +1,8 @@
 import ProductCardText from "@/components/Typography/Typography.component";
 import styles from "./ProductCardRating.module.scss";
-import { TProductCardRating } from "../../ProductCard.types";
-import { displayStars } from "../../ProductCard.utils";
 import StarLogo from "./StarLogo";
+import { displayStars } from "../../ProductCard.utils";
+import { TProductCardRating } from "../../ProductCard.types";
 
 const ProductCardRating = (props: TProductCardRating) => {
   const { reviewCount, averageScore, name, stars } = props;

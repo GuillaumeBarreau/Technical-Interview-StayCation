@@ -3,13 +3,16 @@ import ProductCardImage from "./ProductCardImage/ProductCardImage.component";
 import ProductCardDetails from "./ProductCardDetails/ProductCardDetails.component";
 import ProductCardPrice from "./ProductCardPrice/ProductCardPrice.component";
 import styles from "./ProductCard.module.scss";
+import BookingCard from "../BookingCard/BookingCard.component";
+import { useState } from "react";
 
 const ProductCard = (props: IProductCard) => {
-  const { bookingAvailable } = props;
+  const [openBookingCard, setOpenBookingCard] = useState(false);
 
   const {
     name,
     stars,
+    stock,
     preview,
     pictureId,
     discountPrice,
@@ -17,6 +20,8 @@ const ProductCard = (props: IProductCard) => {
     averageScore,
     price,
     percentageDiscount,
+    saleId,
+    roomId,
   } = props;
 
   const ProductCardDetailsProps = {
@@ -38,13 +43,26 @@ const ProductCard = (props: IProductCard) => {
     percentageDiscount,
   };
 
+  const BookingCardProps = {
+    saleId,
+    roomId,
+    stock,
+  };
+
+  const stockIfAvailable = Number(stock) > 0 ? true : false;
+
   return (
     <div
-      className={`${styles.productCardWrapper} ${bookingAvailable ? "" : styles.productCardWrapperDisabled}`}
+      className={`${styles.productCardWrapper} ${!stockIfAvailable && styles.productCardWrapperDisabled}`}
+      onClick={() =>
+        stockIfAvailable &&
+        setOpenBookingCard((openBookingCard) => !openBookingCard)
+      }
     >
       <ProductCardImage {...ProductCardImageProps} />
       <ProductCardDetails {...ProductCardDetailsProps} />
       <ProductCardPrice {...ProductCardPriceProps} />
+      {openBookingCard && <BookingCard {...BookingCardProps}></BookingCard>}
     </div>
   );
 };

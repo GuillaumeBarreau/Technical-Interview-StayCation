@@ -1,7 +1,7 @@
-import { TProductCardPrice } from "../ProductCard.types";
 import Typography from "@/components/Typography/Typography.component";
 import Badge from "@/components/Badge/Badge.component";
 import styles from "./ProductCardPrice.module.scss";
+import { TProductCardPrice } from "../ProductCard.types";
 
 const ProductCardPrice = (props: TProductCardPrice) => {
   const { price, discountPrice, percentageDiscount } = props;
