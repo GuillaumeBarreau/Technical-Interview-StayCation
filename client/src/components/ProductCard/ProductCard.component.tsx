@@ -22,7 +22,10 @@ const ProductCard = (props: IProductCard) => {
     percentageDiscount,
     saleId,
     roomId,
+    matchingCount,
   } = props;
+
+  const stockIfAvailable = stock - matchingCount > 0 ? true : false;
 
   const ProductCardDetailsProps = {
     name,
@@ -46,10 +49,7 @@ const ProductCard = (props: IProductCard) => {
   const BookingCardProps = {
     saleId,
     roomId,
-    stock,
   };
-
-  const stockIfAvailable = Number(stock) > 0 ? true : false;
 
   return (
     <div

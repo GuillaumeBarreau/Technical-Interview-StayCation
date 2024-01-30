@@ -1,4 +1,4 @@
-import { queryCountStockAvailable } from "../bookings/booking.service.js";
+import { queryMatchingRoomBookings } from "../bookings/booking.service.js";
 import { querySelectHotelDetails } from "./hotels.service.js";
 import { querySelectLastSafeDate } from "../sale_dates/sale_dates.service.js";
 import { calculatePercentageDiscount } from "../../../utils/utils.js";
@@ -17,7 +17,7 @@ export const getLastPackageHotels = async () => {
       hotelInformation.map(async (details) => {
         const { id, preview, ...rest } = details;
 
-        const { remainingStock } = await queryCountStockAvailable({
+        const { matchingCount } = await queryMatchingRoomBookings({
           roomId: details.roomId,
           stock: details.stock,
           saleId,
@@ -25,7 +25,7 @@ export const getLastPackageHotels = async () => {
 
         return {
           ...rest,
-          stock: remainingStock,
+          matchingCount,
           averageScore: details.averageScore.toFixed(1),
           preview: details.preview.replace(/\+/g, "◦"),
           percentageDiscount: calculatePercentageDiscount(

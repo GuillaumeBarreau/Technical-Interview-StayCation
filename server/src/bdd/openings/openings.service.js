@@ -14,7 +14,7 @@ export const querySelectOpeningsByRoomID = async ({ saleId, roomId }) => {
           WHERE b.date = o.date
             AND b.room_id = o.room_id
       )
-    ORDER BY o.date ASC;
+    ORDER BY o.date DESC;
   `;
 
   const { rows } = await DB.query(query, [saleId, roomId]);

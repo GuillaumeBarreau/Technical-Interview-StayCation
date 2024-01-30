@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { getUser } from "./services/userService.js";
-import { getHotels } from "./services/hotels/get-hotels.service.js";
+import { getUser } from "./src/bdd/userService.js";
 import { getLastPackageHotels } from "./src/bdd/hotels/hotels.controller.js";
 import { getBookingAvailable } from "./src/bdd/bookings/booking.controller.js";
 import { getOpeningsRoom } from "./src/bdd/openings/openings.controller.js";
@@ -10,19 +9,6 @@ import { getOpeningsRoom } from "./src/bdd/openings/openings.controller.js";
 const app = express();
 
 app.use(cors());
-
-app.get("/hotels", async (req, res) => {
-  try {
-    const hotels = await getHotels();
-
-    if (hotels) {
-      res.status(200).send(hotels);
-    }
-  } catch (error) {
-    res.status(500).send("Error");
-    console.log(error);
-  }
-});
 
 app.get("/last-hotels-package", async (req, res) => {
   try {
@@ -49,10 +35,10 @@ app.get("/booking/:roomId/:stock", async (req, res) => {
   }
 });
 
-app.get("/openings/:saleId/:roomId/:stock", async (req, res) => {
+app.get("/openings/:saleId/:roomId", async (req, res) => {
   try {
-    const { saleId, roomId, stock } = req.params;
-    const openings = await getOpeningsRoom({ saleId, roomId, stock });
+    const { saleId, roomId } = req.params;
+    const openings = await getOpeningsRoom({ saleId, roomId });
 
     res.status(200).send(openings);
   } catch (error) {

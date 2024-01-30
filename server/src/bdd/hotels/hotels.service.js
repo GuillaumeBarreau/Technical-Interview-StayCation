@@ -17,26 +17,24 @@ export const querySelectLowestRoomPrice = async (saleId) => {
 
 export const querySelectHotelDetails = async (saleId) => {
   const query = `
-    SELECT DISTINCT ON (hotels.id) hotels.*, rooms.hotel_id, openings.*, reviews.review_count, reviews.average_score
-    FROM public.openings AS openings
+    SELECT DISTINCT ON (rooms.hotel_id) hotels.*, rooms.hotel_id, openings.*, reviews.review_count, reviews.average_score
+    FROM public.hotels AS hotels
+    JOIN public.rooms AS rooms ON hotels.id = rooms.hotel_id
     JOIN (
-        SELECT r.hotel_id, o.room_id, MIN(o.discount_price) AS min_discount_price
-        FROM public.openings AS o
-        JOIN public.rooms AS r ON o.room_id = r.id
-        WHERE o.sale_id = $1
-        GROUP BY r.hotel_id, o.room_id
-    ) AS min_prices ON openings.room_id = min_prices.room_id AND openings.discount_price = min_prices.min_discount_price
-    JOIN public.rooms AS rooms ON openings.room_id = rooms.id
-    JOIN public.hotels AS hotels ON rooms.hotel_id = hotels.id
+        SELECT DISTINCT ON (openings.room_id) *
+        FROM public.openings
+        WHERE sale_id = $1
+          AND stock > 0
+        ORDER BY openings.room_id, openings.discount_price ASC
+    ) AS openings ON rooms.id = openings.room_id
     LEFT JOIN (
         SELECT hotel_id, COUNT(id) AS review_count, AVG(score) AS average_score
         FROM public.reviews
         GROUP BY hotel_id
-    ) AS reviews ON hotels.id = reviews.hotel_id
-    WHERE openings.sale_id = $1;
+    ) AS reviews ON rooms.hotel_id = reviews.hotel_id;
   `;
-
   const { rows } = await DB.query(query, [saleId]);
+  console.log(  "rows", rows);
 
   return camelCase(rows);
 };

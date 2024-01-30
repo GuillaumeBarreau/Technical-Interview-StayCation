@@ -14,6 +14,7 @@ export interface IProductCard {
   reviewCount: number;
   averageScore: number;
   percentageDiscount: number;
+  matchingCount: number;
 }
 export type TProductCardDetails = Pick<IProductCard, "name" | "stars" | "preview" | "reviewCount" | "averageScore">;
 export type TProductCardTitle = Pick<IProductCard, "name"  >;
