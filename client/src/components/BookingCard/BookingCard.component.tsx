@@ -27,8 +27,6 @@ const BookingCard = (props: IBookingCard) => {
     fetchData();
   }, []);
 
-  console.log("openingsData", openingsData);
-
   return (
     <div className={styles.bookingCardWrapper}>
       <div className={styles.bookingCardContent}>
