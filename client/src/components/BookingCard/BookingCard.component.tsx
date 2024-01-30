@@ -29,7 +29,7 @@ const BookingCard = (props: IBookingCard) => {
   return (
     <div className={styles.bookingCardWrapper}>
       <div className={styles.bookingCardContent}>
-        {openingsData ? (
+        {openingsData.length > 0 ? (
           openingsData.map((opening) => {
             const {
               price,

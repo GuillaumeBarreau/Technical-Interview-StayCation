@@ -34,7 +34,6 @@ export const querySelectHotelDetails = async (saleId) => {
     ) AS reviews ON rooms.hotel_id = reviews.hotel_id;
   `;
   const { rows } = await DB.query(query, [saleId]);
-  console.log(  "rows", rows);
 
   return camelCase(rows);
 };

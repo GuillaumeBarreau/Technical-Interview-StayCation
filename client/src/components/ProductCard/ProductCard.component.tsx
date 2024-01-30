@@ -61,7 +61,7 @@ const ProductCard = (props: IProductCard) => {
     >
       <ProductCardImage {...ProductCardImageProps} />
       <ProductCardDetails {...ProductCardDetailsProps} />
-      <ProductCardPrice {...ProductCardPriceProps} />
+      {stockIfAvailable && <ProductCardPrice {...ProductCardPriceProps} />}
       {openBookingCard && <BookingCard {...BookingCardProps}></BookingCard>}
     </div>
   );
