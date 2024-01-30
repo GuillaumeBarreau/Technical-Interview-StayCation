@@ -3,32 +3,9 @@ import ProductCardImage from "./ProductCardImage/ProductCardImage.component";
 import ProductCardDetails from "./ProductCardDetails/ProductCardDetails.component";
 import ProductCardPrice from "./ProductCardPrice/ProductCardPrice.component";
 import styles from "./ProductCard.module.scss";
-import { useEffect, useState } from "react";
 
 const ProductCard = (props: IProductCard) => {
-  const [available, setAvailable] = useState<boolean>(true);
-  const { roomId, stock } = props;
-  const fetchBookingData = async ({
-    roomId,
-    stock,
-  }: {
-    roomId: number;
-    stock: number;
-  }) => {
-    try {
-      const res = await fetch(
-        `http://localhost:9000/booking/${roomId}/${stock}`
-      );
-      const { bookingAvailable } = await res.json();
-      setAvailable(bookingAvailable);
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchBookingData({ roomId, stock });
-  }, []);
+  const { bookingAvailable } = props;
 
   const {
     name,
@@ -63,7 +40,7 @@ const ProductCard = (props: IProductCard) => {
 
   return (
     <div
-      className={`${styles.productCardWrapper} ${available ? "" : styles.productCardWrapperDisabled}`}
+      className={`${styles.productCardWrapper} ${bookingAvailable ? "" : styles.productCardWrapperDisabled}`}
     >
       <ProductCardImage {...ProductCardImageProps} />
       <ProductCardDetails {...ProductCardDetailsProps} />
