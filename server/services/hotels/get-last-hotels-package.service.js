@@ -1,6 +1,7 @@
 import camelCase from "camelcase-keys";
 import DB from "../../client-pg.js";
 import { calculatePercentageDiscount } from "../../utils/utils.js";
+import { getBookingAvailable } from "../booking/get-booking.service.js";
 
 export const queryLastSafeId = async () => {
   const query = `
@@ -30,6 +31,9 @@ const queryRoomMinPrices = async (saleId) => {
 };
 
 const queryHotelDetails = async (saleId) => {
+  // TODO : This query does not return the room with the cheapest price.
+  // A correction needs to be made to it.
+  // Using DISTINCT ON guarantees only one row per hotel, but the price is incorrect.
   const query = `
     SELECT DISTINCT ON (hotels.id) hotels.*, rooms.hotel_id, openings.*, reviews.review_count, reviews.average_score
     FROM public.openings AS openings
@@ -49,7 +53,7 @@ const queryHotelDetails = async (saleId) => {
 };
 
 const getLastHotelsPackage = async (saleId) => {
-  const minPrices = await queryRoomMinPrices(saleId);
+  // const minPrices = await queryRoomMinPrices(saleId);
   const hotelInformation = await queryHotelDetails(saleId);
 
   return hotelInformation;
@@ -59,18 +63,38 @@ export const getHotelsPackagesData = async () => {
   const lastSaleId = await queryLastSafeId();
   const hotelInformation = await getLastHotelsPackage(lastSaleId);
 
-  const parseData = hotelInformation.map((details) => {
-    const { id, preview, ...rest } = details;
+  const parseData = async (hotelInformation) => {
+    const parsedData = await Promise.all(
+      hotelInformation.map(async (details) => {
+        const { id, preview, ...rest } = details;
+        const { bookingAvailable } = await getBookingAvailable(
+          details.roomId,
+          details.stock
+        );
 
-    return {
-      ...rest,
-      averageScore: details.averageScore.toFixed(1),
-      preview: details.preview.replace(/\+/g, "◦"),
-      percentageDiscount: calculatePercentageDiscount(
-        details.discountPrice,
-        details.price
-      ),
-    };
-  });
-  return parseData;
+        return {
+          ...rest,
+          averageScore: details.averageScore.toFixed(1),
+          preview: details.preview.replace(/\+/g, "◦"),
+          percentageDiscount: calculatePercentageDiscount(
+            details.discountPrice,
+            details.price
+          ),
+          bookingAvailable,
+        };
+      })
+    );
+
+    return parsedData;
+  };
+
+  const result = await parseData(hotelInformation)
+    .then((parsedData) => {
+      return parsedData;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  return result;
 };
