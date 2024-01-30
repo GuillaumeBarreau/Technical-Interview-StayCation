@@ -6,14 +6,15 @@ export const querySelectOpeningsByRoomID = async ({ saleId, roomId }) => {
     SELECT *
     FROM public.openings o
     WHERE sale_id = $1
-    AND room_id = $2
-    AND stock > 0
-    AND NOT EXISTS (
-        SELECT 1
-        FROM public.bookings b
-        WHERE b.date = o.date
-        AND b.room_id = o.room_id
-    );
+      AND room_id = $2
+      AND stock > 0
+      AND NOT EXISTS (
+          SELECT 1
+          FROM public.bookings b
+          WHERE b.date = o.date
+            AND b.room_id = o.room_id
+      )
+    ORDER BY o.date ASC;
   `;
 
   const { rows } = await DB.query(query, [saleId, roomId]);
