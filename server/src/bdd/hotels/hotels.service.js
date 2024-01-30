@@ -16,16 +16,12 @@ export const querySelectLowestRoomPrice = async (saleId) => {
 };
 
 export const querySelectHotelDetails = async (saleId) => {
+  // TODO : This query does not return the last availability .
+  // A correction needs to be made to it.
+  // Using DISTINCT ON guarantees only one row per hotel, but the price is incorrect.
   const query = `
     SELECT DISTINCT ON (hotels.id) hotels.*, rooms.hotel_id, openings.*, reviews.review_count, reviews.average_score
     FROM public.openings AS openings
-    JOIN (
-        SELECT r.hotel_id, o.room_id, MIN(o.discount_price) AS min_discount_price
-        FROM public.openings AS o
-        JOIN public.rooms AS r ON o.room_id = r.id
-        WHERE o.sale_id = $1
-        GROUP BY r.hotel_id, o.room_id
-    ) AS min_prices ON openings.room_id = min_prices.room_id AND openings.discount_price = min_prices.min_discount_price
     JOIN public.rooms AS rooms ON openings.room_id = rooms.id
     JOIN public.hotels AS hotels ON rooms.hotel_id = hotels.id
     LEFT JOIN (
@@ -33,7 +29,7 @@ export const querySelectHotelDetails = async (saleId) => {
         FROM public.reviews
         GROUP BY hotel_id
     ) AS reviews ON hotels.id = reviews.hotel_id
-    WHERE openings.sale_id = $1;
+    WHERE openings.sale_id = $1
   `;
 
   const { rows } = await DB.query(query, [saleId]);
