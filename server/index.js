@@ -10,7 +10,7 @@ const app = express();
 
 app.use(cors());
 
-app.get("/last-hotels-package", async (req, res) => {
+app.get("/hotels/last-sale", async (req, res) => {
   try {
     const packages = await hotelsControllers.getLastPackageHotels();
 

@@ -1,36 +1,38 @@
-import { useEffect, useState } from "react";
-import { IBookingCard } from "./BookingCard.types";
+import { useQuery } from "@tanstack/react-query";
+import { IBookingCard, IOpening } from "./BookingCard.types";
 import styles from "./BookingCard.module.scss";
 import { formatDate } from "./BookingCard.utils";
 import Typography from "../Typography/Typography.component";
 import ProductCardPrice from "../ProductCard/ProductCardPrice/ProductCardPrice.component";
+import { fetchOpenings } from "@/api/openings.api";
+import { BookingCardSkeleton } from "./BookingCard.skeleton";
 
 const BookingCard = (props: IBookingCard) => {
   const { saleId, roomId } = props;
+  const { data, isLoading, isError } = useQuery({
+    queryKey: [`bookings_${saleId}_${roomId}`],
+    queryFn: (): Promise<IOpening[]> =>
+      fetchOpenings.openingsAvailableByRoomId({ saleId, roomId }),
+    initialData: [],
+  });
 
-  const [openingsData, setOpeningsData] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:9000/openings/${saleId}/${roomId}`
-      );
-      const result = await res.json();
-      setOpeningsData(result);
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  if (isLoading) {
+    return (
+      <div className={styles.bookingCardWrapper}>
+        <div className={styles.bookingCardContent}>
+          <BookingCardSkeleton />
+          <br />
+          <Typography fontSize="large">{`Requête en cours...`}</Typography>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.bookingCardWrapper}>
       <div className={styles.bookingCardContent}>
-        {openingsData.length > 0 ? (
-          openingsData.map((opening) => {
+        {!isError && data.length > 0 ? (
+          data.map((opening) => {
             const {
               price,
               discountPrice,
