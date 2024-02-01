@@ -1,8 +1,11 @@
-import { querySelectOpeningsByRoomID } from "./openings.service.js";
+import { openingsQuery } from "./openings.query.js";
 import { calculatePercentageDiscount } from "../../../utils/utils.js";
 
-export const getOpeningsRoom = async ({ saleId, roomId }) => {
-  const response = await querySelectOpeningsByRoomID({ saleId, roomId });
+const getOpeningsByRoomID = async ({ saleId, roomId }) => {
+  const response = await openingsQuery.findOpeningsByRoomID({
+    saleId,
+    roomId,
+  });
 
   const results = response.map((details) => {
     const { price, discountPrice, ...rest } = details;
@@ -19,4 +22,8 @@ export const getOpeningsRoom = async ({ saleId, roomId }) => {
   });
 
   return results;
+};
+
+export const openingsControllers = {
+  getOpeningsByRoomID,
 };

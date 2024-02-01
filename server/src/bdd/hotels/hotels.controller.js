@@ -1,23 +1,27 @@
-import { queryMatchingRoomBookings } from "../bookings/booking.service.js";
-import { querySelectHotelDetails } from "./hotels.service.js";
-import { querySelectLastSafeDate } from "../sale_dates/sale_dates.service.js";
+import { bookingsQuery } from "../bookings/bookings.query.js";
+import { hotelsQuery } from "./hotels.query.js";
+import { saleDatesQuery } from "../sale_dates/sale_dates.query.js";
 import { calculatePercentageDiscount } from "../../../utils/utils.js";
 
-const getHotelDetails = async (saleId) => {
-  const hotelInformation = await querySelectHotelDetails(saleId);
+const getHotelsDataBySaleId = async (saleId) => {
+  const hotelInformation = await hotelsQuery.findDistinctHotelsDataBySaleId(
+    saleId
+  );
   return hotelInformation;
 };
 
-export const getLastPackageHotels = async () => {
-  const { id: saleId } = await querySelectLastSafeDate();
-  const hotelInformation = await getHotelDetails(saleId);
+const getLastPackageHotels = async () => {
+  const { id: saleId } = await saleDatesQuery.querySelectLastSafeDate();
+  const hotelInformation = await hotelsQuery.findDistinctHotelsDataBySaleId(
+    saleId
+  );
 
   const parseData = async (hotelInformation) => {
     const parsedData = await Promise.all(
       hotelInformation.map(async (details) => {
         const { id, preview, ...rest } = details;
 
-        const { matchingCount } = await queryMatchingRoomBookings({
+        const { matchingCount } = await bookingsQuery.findAndCountRoomBookings({
           roomId: details.roomId,
           stock: details.stock,
           saleId,
@@ -48,4 +52,9 @@ export const getLastPackageHotels = async () => {
     });
 
   return result;
+};
+
+export const hotelsControllers = {
+  getLastPackageHotels,
+  getHotelsDataBySaleId,
 };

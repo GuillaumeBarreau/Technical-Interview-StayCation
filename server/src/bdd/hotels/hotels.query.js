@@ -1,7 +1,7 @@
 import camelCase from "camelcase-keys";
 import DB from "../../../client-pg.js";
 
-export const querySelectLowestRoomPrice = async (saleId) => {
+const findOpeningsLowestPriceByRoomId = async (saleId) => {
   const query = `
     SELECT room_id, MIN(price) AS price, MIN(discount_price) AS discount_price
     FROM public.openings
@@ -15,7 +15,7 @@ export const querySelectLowestRoomPrice = async (saleId) => {
   return camelCase(rows);
 };
 
-export const querySelectHotelDetails = async (saleId) => {
+const findDistinctHotelsDataBySaleId = async (saleId) => {
   const query = `
     SELECT DISTINCT ON (rooms.hotel_id) hotels.*, rooms.hotel_id, openings.*, reviews.review_count, reviews.average_score
     FROM public.hotels AS hotels
@@ -36,4 +36,9 @@ export const querySelectHotelDetails = async (saleId) => {
   const { rows } = await DB.query(query, [saleId]);
 
   return camelCase(rows);
+};
+
+export const hotelsQuery = {
+  findDistinctHotelsDataBySaleId,
+  findOpeningsLowestPriceByRoomId,
 };

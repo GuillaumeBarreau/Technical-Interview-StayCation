@@ -1,7 +1,7 @@
 import camelCase from "camelcase-keys";
 import DB from "../../../client-pg.js";
 
-export const querySelectOpeningsByRoomID = async ({ saleId, roomId }) => {
+const findOpeningsByRoomID = async ({ saleId, roomId }) => {
   const query = `
     SELECT *
     FROM public.openings o
@@ -19,4 +19,8 @@ export const querySelectOpeningsByRoomID = async ({ saleId, roomId }) => {
 
   const { rows } = await DB.query(query, [saleId, roomId]);
   return camelCase(rows);
+};
+
+export const openingsQuery = {
+  findOpeningsByRoomID,
 };
