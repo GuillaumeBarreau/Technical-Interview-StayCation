@@ -55,8 +55,9 @@ app.get("/openings/:saleId/:roomId", async (req, res) => {
 
 app.get("/users/:id", async (req, res) => {
   try {
-    const user = await usersControllers.getUserById(req.params.id);
-
+    const { id } = req.params;
+    const user = await usersControllers.getUserById({ userId: id });
+    console.log("user", user);
     if (user) {
       res.status(200).send(user);
     }

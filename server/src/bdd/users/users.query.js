@@ -7,6 +7,7 @@ const findUserById = async ({ userId }) => {
   `;
 
   const { rows } = await DB.query(query, [userId]);
+
   return camelCase(rows[0]);
 };
 
