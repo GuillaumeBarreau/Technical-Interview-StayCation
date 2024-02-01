@@ -16,7 +16,7 @@ const getOpeningsByRoomID = async ({ saleId, roomId }) => {
       discountPrice,
       percentageDiscount: calculatePercentageDiscount(
         details.discountPrice,
-        details.price
+        details.price,
       ),
     };
   });

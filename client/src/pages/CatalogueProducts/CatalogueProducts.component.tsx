@@ -7,44 +7,40 @@ import { fetchHotels } from "@/api/hotels.api";
 import Typography from "@/components/Typography/Typography.component";
 
 const CatalogueProducts = () => {
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: products, isError } = useQuery({
     queryKey: [`hotels`],
     queryFn: (): Promise<IProductCard[]> => fetchHotels.hotelsByLastSale(),
     initialData: [],
   });
 
-  if (isLoading) {
-    return Array.from({ length: 10 }).map((_, index) => (
-      <li key={index} className={styles.catalogueProductsItem}>
-        <ProductCardSkeleton />
-      </li>
-    ));
+  if (isError) {
+    return (
+      <div className={styles.catalogueProductsItemWrapperWithoutData}>
+        <Typography fontSize="large">{`Aucune donnée disponible.`}</Typography>
+      </div>
+    );
   }
 
   return (
     <div className={styles.catalogueProductsWrapper}>
-      {!isError && products?.length > 0 ? (
-        <ul className={styles.catalogueProductsItemWrapper}>
-          {products?.map((product) => {
-            return (
-              <li
-                key={product?.hotelId}
-                className={styles.catalogueProductsItem}
-              >
-                <ProductCard {...product} />
+      <ul className={styles.catalogueProductsItemWrapper}>
+        {!isError && products?.length > 0
+          ? products?.map((product) => {
+              return (
+                <li
+                  key={product?.hotelId}
+                  className={styles.catalogueProductsItem}
+                >
+                  <ProductCard {...product} />
+                </li>
+              );
+            })
+          : Array.from({ length: 10 }).map((_, index) => (
+              <li key={index} className={styles.catalogueProductsItem}>
+                <ProductCardSkeleton />
               </li>
-            );
-          })}
-        </ul>
-      ) : (
-        <div className={styles.catalogueProductsItemWrapperWithoutData}>
-          <Typography fontSize="large">{`Aucune donnée disponible.`}</Typography>
-        </div>
-      )}
+            ))}
+      </ul>
     </div>
   );
 };

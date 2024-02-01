@@ -57,7 +57,7 @@ app.get("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await usersControllers.getUserById({ userId: id });
-    console.log("user", user);
+
     if (user) {
       res.status(200).send(user);
     }

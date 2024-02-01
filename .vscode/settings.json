@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["disponible", "Staycation"]
+  "cSpell.words": ["disponible", "Staycation"],
+  "eslint.workingDirectories": ["client", "server"]
 }

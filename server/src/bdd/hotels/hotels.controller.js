@@ -4,17 +4,15 @@ import { saleDatesQuery } from "../sale_dates/sale_dates.query.js";
 import { calculatePercentageDiscount } from "../../../utils/utils.js";
 
 const getHotelsDataBySaleId = async (saleId) => {
-  const hotelInformation = await hotelsQuery.findDistinctHotelsDataBySaleId(
-    saleId
-  );
+  const hotelInformation =
+    await hotelsQuery.findDistinctHotelsDataBySaleId(saleId);
   return hotelInformation;
 };
 
 const getLastPackageHotels = async () => {
   const { id: saleId } = await saleDatesQuery.querySelectLastSafeDate();
-  const hotelInformation = await hotelsQuery.findDistinctHotelsDataBySaleId(
-    saleId
-  );
+  const hotelInformation =
+    await hotelsQuery.findDistinctHotelsDataBySaleId(saleId);
 
   const parseData = async (hotelInformation) => {
     const parsedData = await Promise.all(
@@ -26,7 +24,6 @@ const getLastPackageHotels = async () => {
           stock: details.stock,
           saleId,
         });
-
         return {
           ...rest,
           matchingCount,
