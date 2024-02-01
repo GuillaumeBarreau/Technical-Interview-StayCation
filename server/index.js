@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 
-import { getUser } from "./src/bdd/userService.js";
-import { getLastPackageHotels } from "./src/bdd/hotels/hotels.controller.js";
-import { getBookingAvailable } from "./src/bdd/bookings/booking.controller.js";
-import { getOpeningsRoom } from "./src/bdd/openings/openings.controller.js";
+import { usersControllers } from "./src/bdd/users/users.controller.js";
+import { hotelsControllers } from "./src/bdd/hotels/hotels.controller.js";
+import { bookingsControllers } from "./src/bdd/bookings/bookings.controller.js";
+import { openingsControllers } from "./src/bdd/openings/openings.controller.js";
 
 const app = express();
 
@@ -26,7 +26,10 @@ app.get("/last-hotels-package", async (req, res) => {
 app.get("/booking/:roomId/:stock", async (req, res) => {
   try {
     const { stock, roomId } = req.params;
-    const stockAvailable = await getBookingAvailable({ roomId, stock });
+    const stockAvailable = await bookingsControllers.getBookingAvailable({
+      roomId,
+      stock,
+    });
 
     res.status(200).send(stockAvailable);
   } catch (error) {
@@ -38,7 +41,10 @@ app.get("/booking/:roomId/:stock", async (req, res) => {
 app.get("/openings/:saleId/:roomId", async (req, res) => {
   try {
     const { saleId, roomId } = req.params;
-    const openings = await getOpeningsRoom({ saleId, roomId });
+    const openings = await openingsControllers.getOpeningsRoom({
+      saleId,
+      roomId,
+    });
 
     res.status(200).send(openings);
   } catch (error) {
@@ -49,7 +55,7 @@ app.get("/openings/:saleId/:roomId", async (req, res) => {
 
 app.get("/users/:id", async (req, res) => {
   try {
-    const user = await getUser(req.params.id);
+    const user = await usersControllers.getUserById(req.params.id);
 
     if (user) {
       res.status(200).send(user);

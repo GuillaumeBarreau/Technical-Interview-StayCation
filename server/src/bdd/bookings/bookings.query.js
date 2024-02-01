@@ -19,3 +19,7 @@ export const queryMatchingRoomBookings = async ({ roomId, saleId }) => {
 
   return camelCase(rows[0]);
 };
+
+export const bookingsQuery = {
+  queryMatchingRoomBookings,
+};

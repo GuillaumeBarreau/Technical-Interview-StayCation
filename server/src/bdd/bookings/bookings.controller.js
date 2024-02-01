@@ -16,3 +16,8 @@ export const getBookingAvailable = async ({ roomId, stock }) => {
     matchingCount,
   };
 };
+
+export const bookingsControllers = {
+  getLastPackageHotels,
+  getHotelDetails,
+};
