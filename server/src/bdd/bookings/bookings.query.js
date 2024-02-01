@@ -1,7 +1,7 @@
 import camelCase from "camelcase-keys";
 import DB from "../../../client-pg.js";
 
-export const queryMatchingRoomBookings = async ({ roomId, saleId }) => {
+export const findAndCountRoomBookings = async ({ roomId, saleId }) => {
   const query = `
       WITH SaleDatesRange AS (
         SELECT start_date, end_date
@@ -10,9 +10,9 @@ export const queryMatchingRoomBookings = async ({ roomId, saleId }) => {
     )
 
     SELECT COUNT(*) AS matching_count
-    FROM public.bookings AS b
-    JOIN SaleDatesRange AS sdr ON b.date BETWEEN sdr.start_date AND sdr.end_date
-    WHERE b.room_id = $1;
+    FROM public.bookings AS bookings
+    JOIN SaleDatesRange AS sdr ON bookings.date BETWEEN sdr.start_date AND sdr.end_date
+    WHERE bookings.room_id = $1;
   `;
 
   const { rows } = await DB.query(query, [roomId, saleId]);
@@ -21,5 +21,5 @@ export const queryMatchingRoomBookings = async ({ roomId, saleId }) => {
 };
 
 export const bookingsQuery = {
-  queryMatchingRoomBookings,
+  findAndCountRoomBookings,
 };

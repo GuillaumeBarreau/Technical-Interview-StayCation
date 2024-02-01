@@ -1,10 +1,10 @@
-import { querySelectLastSafeDate } from "../sale_dates/sale_dates.service.js";
-import { queryMatchingRoomBookings } from "./booking.service.js";
+import { saleDatesQuery } from "../sale_dates/sale_dates.query.js";
+import { bookingsQuery } from "./bookings.query.js";
 
 export const getBookingAvailable = async ({ roomId, stock }) => {
-  const { id: saleId } = await querySelectLastSafeDate();
+  const { id: saleId } = await saleDatesQuery.querySelectLastSafeDate();
 
-  const response = await queryMatchingRoomBookings({
+  const response = await bookingsQuery.findAndCountRoomBookings({
     roomId,
     stock,
     saleId,
@@ -18,6 +18,5 @@ export const getBookingAvailable = async ({ roomId, stock }) => {
 };
 
 export const bookingsControllers = {
-  getLastPackageHotels,
-  getHotelDetails,
+  getBookingAvailable,
 };

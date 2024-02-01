@@ -12,7 +12,7 @@ app.use(cors());
 
 app.get("/last-hotels-package", async (req, res) => {
   try {
-    const packages = await getLastPackageHotels();
+    const packages = await hotelsControllers.getLastPackageHotels();
 
     if (packages) {
       res.status(200).send(packages);
@@ -41,7 +41,7 @@ app.get("/booking/:roomId/:stock", async (req, res) => {
 app.get("/openings/:saleId/:roomId", async (req, res) => {
   try {
     const { saleId, roomId } = req.params;
-    const openings = await openingsControllers.getOpeningsRoom({
+    const openings = await openingsControllers.getOpeningsByRoomID({
       saleId,
       roomId,
     });
