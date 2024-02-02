@@ -16,22 +16,16 @@ const BookingCard = (props: IBookingCard) => {
     initialData: [],
   });
 
-  if (isLoading) {
+  if (isError) {
     return (
-      <div className={styles.bookingCardWrapper}>
-        <div className={styles.bookingCardContent}>
-          <BookingCardSkeleton />
-          <br />
-          <Typography fontSize="large">{`Requête en cours...`}</Typography>
-        </div>
-      </div>
+      <Typography fontSize="large">{`Aucune donnée disponible.`}</Typography>
     );
   }
 
   return (
     <div className={styles.bookingCardWrapper}>
       <div className={styles.bookingCardContent}>
-        {!isError && data.length > 0 ? (
+        {!isLoading && data.length > 0 ? (
           data.map((opening) => {
             const {
               price,
@@ -61,7 +55,13 @@ const BookingCard = (props: IBookingCard) => {
             );
           })
         ) : (
-          <Typography fontSize="large">{`Aucune donnée disponible.`}</Typography>
+          <div className={styles.bookingCardWrapper}>
+            <div className={styles.bookingCardContent}>
+              <BookingCardSkeleton />
+              <br />
+              <Typography fontSize="large">{`Requête en cours...`}</Typography>
+            </div>
+          </div>
         )}
       </div>
     </div>
